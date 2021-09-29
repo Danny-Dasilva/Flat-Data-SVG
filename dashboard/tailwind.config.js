@@ -1,16 +1,28 @@
-const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  mode: "jit",
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  purge: {
+    content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+    options: {
+      safelist: [
+        "h-10",
+        "overflow-ellipsis",
+        "block",
+        "whitespace-nowrap",
+        "overflow-hidden",
+      ],
+    },
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      gray: colors.coolGray,
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
